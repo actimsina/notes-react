@@ -1,38 +1,22 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Button, ListGroup } from 'react-bootstrap'
 
-export default function NoteList() {
+export default function NoteList({ notes, handleDelete, handleEdit }) {
+
     return (
-        <div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td colSpan={2}>Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </Table>
-        </div>
+        <ListGroup className='mb-3'>
+            {
+                notes.map(note => (
+                    <ListGroup.Item key={note.id} className='d-flex justify-content-between align-items-start'>
+                        <div className='ms-2 me-auto'>
+                            {note.title}
+                        </div>
+                        <Button onClick={() => handleDelete(note.id)} size='sm' variant='danger'>delete</Button>
+                        <Button onClick={() => handleEdit(note.id)} size='sm' variant='warning'>edit</Button>
+                    </ListGroup.Item>
+                ))
+            }
+
+        </ListGroup>
     )
 }

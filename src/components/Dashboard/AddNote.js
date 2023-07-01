@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import React from 'react'
+import { Button, Form, Modal } from 'react-bootstrap'
 
-export default function AddNote() {
-    const [show, setShow] = useState(false);
+export default function AddNote(props) {
+    const { handleSave, handleClose, handleShow, title, setTitle, show } = props
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     return (
         <>
             <div className='d-grid'>
@@ -15,15 +13,26 @@ export default function AddNote() {
             </div>
 
             <Modal show={show} onHide={handleShow}>
-                <Modal.Header>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+                <Modal.Body>
+                    <Form onSubmit={handleSave}>
+                        <Form.Group className="mb-3">
+                            <Form.Control type="text" placeholder="Enter note title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Check
+                            type="checkbox"
+                            id="completed"
+                            label="is complete?"
+                        />
+                    </Form>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleSave}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

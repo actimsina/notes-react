@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default function Register() {
     return (
@@ -25,6 +26,10 @@ export default function Register() {
                         Register
                     </Button>
                 </div>
+                <Form.Text>
+                    Already registered? <Link to={'/'}>Login Here!</Link>
+                </Form.Text>
+
             </Form>
         </div>
     )
