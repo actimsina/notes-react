@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 
 export default function AddNote(props) {
-    const { handleSave, handleClose, handleShow, title, setTitle, show } = props
+    const { handleSave, handleClose, handleShow, show, newNote, setNewNote, edit, handleUpdate } = props
 
     return (
         <>
@@ -17,14 +17,22 @@ export default function AddNote(props) {
                     <Form onSubmit={handleSave}>
                         <Form.Group className="mb-3">
                             <Form.Control type="text" placeholder="Enter note title"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
+                                value={newNote.title}
+                                onChange={(e) => setNewNote({
+                                    ...newNote,
+                                    title: e.target.value
+                                })}
                             />
                         </Form.Group>
                         <Form.Check
                             type="checkbox"
                             id="completed"
                             label="is complete?"
+                            checked={newNote.completed}
+                            onChange={(e) => setNewNote({
+                                ...newNote,
+                                completed: !newNote.completed
+                            })}
                         />
                     </Form>
                 </Modal.Body>
@@ -32,9 +40,16 @@ export default function AddNote(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleSave}>
-                        Save Changes
-                    </Button>
+                    {edit ? (
+                        <Button variant="primary" onClick={handleUpdate}>
+                            Update Changes
+                        </Button>
+                    ) : (
+                        <Button variant="primary" onClick={handleSave}>
+                            Save Changes
+                        </Button>
+                    )}
+
                 </Modal.Footer>
             </Modal>
         </>

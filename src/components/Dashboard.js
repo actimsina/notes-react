@@ -6,10 +6,13 @@ import noteService from '../services/noteService'
 
 export default function Dashboard() {
     const [notes, setNotes] = useState([])
+    const [newNote, setNewNote] = useState({
+        title: '',
+        completed: false
+    })
 
+    const [edit, setEdit] = useState(false)
     const [show, setShow] = useState(false);
-    const [title, setTitle] = useState('')
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -23,10 +26,12 @@ export default function Dashboard() {
 
     const handleSave = (e) => {
         e.preventDefault()
-        noteService.addNote({ title: title })
+        console.log(newNote)
+        noteService.addNote(newNote)
             .then((res) => {
                 setNotes(notes.concat(res.data))
                 setShow(false)
+                setNewNote({})
             }).catch(err => console.log(err))
     }
 
@@ -37,7 +42,27 @@ export default function Dashboard() {
             }).catch(err => console.log(err))
     }
     const handleEdit = (noteId) => {
-        alert(noteId)
+        const targetNote = notes.find(note => note.id === noteId)
+        console.log(targetNote)
+        setNewNote({
+            ...targetNote
+        })
+        setEdit(true)
+        setShow(true)
+    }
+    const handleUpdate = () => {
+        noteService.updateNote(newNote.id, newNote)
+            .then((res) => {
+                setNotes(notes.map(note => {
+                    if (note.id === newNote.id) {
+                        note = res.data
+                    }
+                    return note
+                }))
+            })
+            .catch(err => console.log(err))
+        setNewNote({})
+        setShow(false)
     }
 
     return (
@@ -53,9 +78,11 @@ export default function Dashboard() {
                     handleSave={handleSave}
                     handleShow={handleShow}
                     handleClose={handleClose}
+                    handleUpdate={handleUpdate}
                     show={show}
-                    title={title}
-                    setTitle={setTitle}
+                    newNote={newNote}
+                    setNewNote={setNewNote}
+                    edit={edit}
                 />
             </div>
         </>

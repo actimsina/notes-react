@@ -9,7 +9,7 @@ export default function NoteList({ notes, handleDelete, handleEdit }) {
                 notes.map(note => (
                     <ListGroup.Item key={note.id} className='d-flex justify-content-between align-items-start'>
                         <div className='ms-2 me-auto'>
-                            {note.title}
+                            <p className={note.completed ? 'text-decoration-line-through' : ''}> {note.title} </p>
                         </div>
                         <Button onClick={() => handleDelete(note.id)} size='sm' variant='danger'>delete</Button>
                         <Button onClick={() => handleEdit(note.id)} size='sm' variant='warning'>edit</Button>
