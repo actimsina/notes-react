@@ -20,7 +20,8 @@ export default function Login() {
                 auth.setUsername(credentials.username)
                 window.localStorage.setItem('token', res.data.token)
                 navigate('/dashboard')
-            }).catch((err) => window.alert(err.response.data.error))
+            })
+            .catch((err) => window.alert(err.response.data.error))
     }
 
     return (

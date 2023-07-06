@@ -67,6 +67,7 @@ export default function Dashboard() {
 
     return (
         <>
+            <h1>Welcome</h1>
             <TopBar />
             <div className='container'>
                 <NoteList
