@@ -17,6 +17,7 @@ export default function AddNote(props) {
                     <Form onSubmit={handleSave}>
                         <Form.Group className="mb-3">
                             <Form.Control type="text" placeholder="Enter note title"
+                                id='note-title'
                                 value={newNote.title}
                                 onChange={(e) => setNewNote({
                                     ...newNote,
@@ -41,11 +42,11 @@ export default function AddNote(props) {
                         Close
                     </Button>
                     {edit ? (
-                        <Button variant="primary" onClick={handleUpdate}>
+                        <Button id='update' variant="primary" onClick={handleUpdate}>
                             Update Changes
                         </Button>
                     ) : (
-                        <Button variant="primary" onClick={handleSave}>
+                        <Button id='save' variant="primary" onClick={handleSave}>
                             Save Changes
                         </Button>
                     )}
