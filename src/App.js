@@ -4,6 +4,7 @@ import Register from './components/Register';
 import { AuthProvider } from './utils/authContext';
 import Dashboard from './components/Dashboard';
 import { RequireAuth } from './utils/RequireAuth';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/register' element={<Register />} />
 
           <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
+          <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>} />
         </Routes>
       </AuthProvider>
     </div>
