@@ -19,7 +19,7 @@ export default function Profile() {
         <Card>
             <Card.Body>
                 <Card.Header>Profile</Card.Header>
-                <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                <Card.Img className='fluid' height="50%" width="50%" variant="top" src={`http://110.44.119.188:4000/images/${user.picture}`} />
                 <Card.Text>{user.username}</Card.Text>
                 <Card.Text>{user.fullname}</Card.Text>
                 <ButtonToolbar className="justify-content-between">

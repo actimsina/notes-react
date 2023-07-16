@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, ListGroup } from 'react-bootstrap'
+import { BsFillTrashFill, BsFillPenFill } from 'react-icons/bs'
 
 export default function NoteList({ notes, handleDelete, handleEdit }) {
 
@@ -11,8 +12,13 @@ export default function NoteList({ notes, handleDelete, handleEdit }) {
                         <div className='ms-2 me-auto'>
                             <p className={note.completed ? 'text-decoration-line-through' : ''}> {note.title} </p>
                         </div>
-                        <Button onClick={() => handleDelete(note.id)} size='sm' variant='danger'>delete</Button>
-                        <Button onClick={() => handleEdit(note.id)} size='sm' variant='warning'>edit</Button>
+                        <Button onClick={() => handleDelete(note.id)} size='sm' variant='danger'>
+                            <BsFillTrashFill />
+                        </Button>
+                        {'-'}
+                        <Button onClick={() => handleEdit(note.id)} size='sm' variant='warning'>
+                            <BsFillPenFill />
+                        </Button>
                     </ListGroup.Item>
                 ))
             }
